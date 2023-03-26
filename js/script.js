@@ -36,7 +36,7 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles', 
   optArticleTagsSelector = '.post-tags .list';
 
-function generateTitleLinks (){
+function generateTitleLinks (customSelector = ''){
    
   /* [DONE] remove contents of titleList */
   const titleList = document.querySelector(optTitleListSelector);
@@ -45,7 +45,10 @@ function generateTitleLinks (){
   /* [DONE] find all the articles and save them to variable: articles */
   let html = '';
   /* [DONE] for each article */
-  const articles = document.querySelectorAll('.posts .post');
+  const articles = document.querySelectorAll(optArticleSelector + customSelector);
+  console.log (optArticleSelector);
+  console.log(customSelector);
+    
     
   for(let article of articles){  
     /* [DONE] get the article id */   
@@ -59,8 +62,7 @@ function generateTitleLinks (){
 
     /* [DONE] create HTML of the link */
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-      
-    
+         
     /* [DONE] insert link html variable */
     titleList.innerHTML = titleList.innerHTML + linkHTML;
     html = html + linkHTML;
@@ -103,7 +105,7 @@ function generateTags(){
     
       /* generate HTML of the link */
       const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
-      console.log(linkHTML);
+           
 
       /* add generated code to html variable */
       tagsWrapperList.innerHTML = tagsWrapperList.innerHTML + linkHTML;
@@ -119,3 +121,73 @@ function generateTags(){
 }
 
 generateTags();
+
+
+
+function tagClickHandler(event){
+  /* prevent default action for this event */
+  event.preventDefault();
+
+  /* make new constant named "clickedElement" and give it the value of "this" */
+  const clickedElement = this;
+  console.log('Tag was clicked');
+ 
+  /* make a new constant "href" and read the attribute "href" of the clicked element */
+  const href = clickedElement.getAttribute('href'); 
+  console.log ('clicked', href);
+  
+
+  /* make a new constant "tag" and extract tag from the "href" constant */
+  const tag = href.replace('#tag-', '');
+
+  /* find all tag links with class active */
+  const activeTagLinks = document.querySelectorAll ('a.active[href^="#tag-"]');
+
+  /* START LOOP: for each active tag link */
+  for (let activeTagLink of activeTagLinks) {
+ 
+    /* remove class active */
+    activeTagLink.classList.remove ('active');
+  }
+  /* END LOOP: for each active tag link */
+
+  /* find all tag links with "href" attribute equal to the "href" constant*/ 
+  const targetTagLink = document.querySelectorAll('a[href="' + href + '"]');  
+  console.log (targetTagLink);
+
+  /* START LOOP: for each found tag link */
+  for (let targetTagLink of activeTagLinks){
+    /* add class active */
+     
+    targetTagLink.classList.add('active'); 
+    console.log ('whether it works', targetTagLink);
+  }
+     
+  
+  /* END LOOP: for each found tag link */
+
+  /* execute function "generateTitleLinks" with article selector as argument */
+  generateTitleLinks('[data-tags~="' + tag + '"]');
+
+}
+
+
+function addClickListenersToTags(){ 
+/* find all links to tags */
+  const targetTagLinks = document.querySelectorAll ('a[href^="#tag-"]');
+    
+  /* START LOOP: for each link */
+  for (let targetTagLink of targetTagLinks) {
+
+
+    /* add tagClickHandler as event listener for that link */
+    targetTagLink.addEventListener ('click', tagClickHandler);
+
+    /* END LOOP: for each link */
+  }
+
+}
+
+addClickListenersToTags();
+  
+

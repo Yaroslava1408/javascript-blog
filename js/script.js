@@ -37,8 +37,10 @@ const optArticleSelector = '.post',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author', 
   optTagsListSelector = '.tags.list',
-  optCloudClassCount = '5',
+  optAuthorsListSelector = '.authors.list',
+  optCloudClassCount = '6',
   optCloudClassPrefix = 'tag-size-';
+
 
 
 function generateTitleLinks (customSelector = ''){
@@ -181,6 +183,7 @@ function generateTags(){
 
     //const tagLinkHTML = '<li><a class = tag-size href="#tag-' + tag + '"><span>' + tag +  '(' + calculateTagClass (allTags[tag], tagsParam) + ')' + '</span></a></li>';
     const tagLinkHTML = '<li><a class = ' + calculateTagClass (allTags[tag], tagsParam) + ' href="#tag-' + tag + '"><span>' + tag  + '(' + allTags[tag] + ')'+ '</span></a></li>';  
+    
     /*NEW add HTML from allTags HTML to tagList */
   
     tagList.innerHTML = tagList.innerHTML + tagLinkHTML;
@@ -250,7 +253,7 @@ function generateAuthors(){
   
     /* find author wrapper */
     const authorWrapperList = article.querySelector(optArticleAuthorSelector); 
-    console.log ('found', authorWrapperList);
+    
     /* make html variable with empty string */
     let html = ' ';
     /* get author from post-author attribute */

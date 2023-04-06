@@ -1,7 +1,8 @@
 'use strict';
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML), 
-  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML)  
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML), 
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
 }
 
 const opts = {
@@ -145,16 +146,16 @@ function generateTags(){
     for (let tag of articleTagsArray) {
     
       /* generate HTML of the link */
+      
       //const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
 
-      const linkHTMLData = {tag, tag};
-    const linkHTML = templates.tagLink(linkHTMLData);
-      
-          
+      const linkHTMLData = {tag};
+      const linkHTML = templates.tagLink(linkHTMLData);
+
       /* add generated code to html variable */
       tagsWrapperList.innerHTML = tagsWrapperList.innerHTML + linkHTML;
       html = html + linkHTML;
-
+      
       /* [NEW] check if this link is NOT already in allTags */
       if(!allTags.hasOwnProperty(tag)) {
         /*NEW add tag to allTags object*/
@@ -265,7 +266,10 @@ function generateAuthors(){
     /* get author from data-author attribute */
     const articleAuthor = article.getAttribute('data-author');
        
-    const linkHTML = '<a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a>';
+    //const linkHTML = '<a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a>';
+    const linkHTMLData = {articleAuthor};
+    const linkHTML = templates.authorLink(linkHTMLData);
+
     
     /* add generated code to html variable */
     authorWrapperList.innerHTML = authorWrapperList.innerHTML + linkHTML;

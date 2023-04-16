@@ -26,8 +26,7 @@
             <h3 class="post-title">The Lord of The Rings. The Fellowship of the Ring</h3>
             <div class="post-author">
               <p><strong>Written by:</strong></p>
-              <ul class="list list-horizontal">
-            </ul>
+              
             </div>
             
             <div class="post-content">
@@ -179,8 +178,7 @@
           <article class="post" id="article-9" data-tags="english detective" data-author="Agatha Christie">
             <h3 class="post-title">And Then There Were None</h3>
             <div class="post-author">
-              <p><strong>Written by:</strong></p>
-              
+              <p><strong>Written by:</strong></p>             
             </div>
             <div class="post-content">
               <p>Tam et facilisis purus. Donec vulputate est quis lobortis posuere. Nunc vitae lorem ut odio faucibus pulvinar nec in justo. Ut ut ante ac tellus ornare tempus. Nunc maximus, tortor et dictum convallis, nunc libero posuere leo, scelerisque ultrices arcu sapien ut tellus.</p>
@@ -198,8 +196,7 @@
           <article class="post" id="article-10" data-tags="foreign fantasy" data-author="Nikolay Gogol">
             <h3 class="post-title">Evenings on the Farm near Dikanka</h3>
             <div class="post-author">
-              <p><strong>Written by:</strong></p>
-               
+              <p><strong>Written by:</strong></p>               
             </div>
             
             <div class="post-content">
@@ -234,18 +231,35 @@
   </script>
 
   <script id="template-tag-link" type="text/x-handlebars-template">
-    <li><a href="#{{ tag }}"><span>{{ tag }}</span></a></li>
+    
+    <li><a href="#tag-{{ tag }}">{{ tag }}</a></li>
+    
   </script>
-
 
   <script id="template-author-link" type="text/x-handlebars-template">
-    <li><a href="#{{ articleAuthor }}"><span>{{ articleAuthor }}</span></a></li>
+    <li><a href="#author-{{ articleAuthor }}">{{ articleAuthor }}</a></li>
   </script>
 
+  <script id="template-tag-cloud-link" type="text/x-handlebars-template">
+    {{#each tags}}
+    <li class="{{className}}"><a href="#tag-{{ tag }}">{{ tag}}({{count}})</a></li>         
+    {{/each}}
+  </script>
 
-
+  <script id="template-author-cloud-link" type="text/x-handlebars-template">
+    {{#each authors}}
+    <li><a href="#author-{{ author }}">{{author}}({{count}})</a></li>         
+    {{/each}}
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src = "js/script.js"></script>
+
+  
+
+
+
+
+
   </body> 
   </html>
